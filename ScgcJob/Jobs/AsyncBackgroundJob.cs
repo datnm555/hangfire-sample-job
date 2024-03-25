@@ -8,8 +8,8 @@ public abstract class AsyncBackgroundJob : BackgroundService
 {
     private readonly IRecurringJobManager _recurringJobs;
     private readonly ILogger<RecurringJobScheduler> _logger;
-    
-    public AsyncBackgroundJob(IRecurringJobManager recurringJobs, ILogger<RecurringJobScheduler> logger)
+
+    protected AsyncBackgroundJob(IRecurringJobManager recurringJobs, ILogger<RecurringJobScheduler> logger)
     {
         _recurringJobs = recurringJobs;
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
