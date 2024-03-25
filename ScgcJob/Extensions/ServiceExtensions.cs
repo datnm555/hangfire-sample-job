@@ -1,7 +1,7 @@
 ﻿using Hangfire;
 using Hangfire.SqlServer;
 using Refit;
-using ScgcJob.Services;
+using ScgcJob.Jobs;
 using ScgcJob.Services.Integrations;
 
 namespace ScgcJob.Extensions;
@@ -18,19 +18,25 @@ public static class ServiceExtensions
     {
         services.AddSingleton<IRecurringJobManager, RecurringJobManager>();
         services.AddSingleton<IBackgroundJobClient, BackgroundJobClient>();
+        services.AddHostedService<AsyncBackgroundJob>();
+       
 
         services.AddHangfire(x =>
             x.UseSqlServerStorage(configuration.GetConnectionString("defaultConnection")));
         JobStorage.Current = new SqlServerStorage(configuration.GetConnectionString("defaultConnection"));
-        services.AddHangfireServer();
+        services.AddHangfireServer(options =>
+        {
+            options.StopTimeout = TimeSpan.FromSeconds(15);
+            options.ShutdownTimeout = TimeSpan.FromSeconds(30);
+        });
 
-        BackgroundJobConfigurator();
+        // BackgroundJobConfigurator();
     }
 
-    private static void BackgroundJobConfigurator()
-    {
-        RecurringJob.RemoveIfExists("ErpRetrieveData");
-        RecurringJob.AddOrUpdate<IJobService>("ErpRetrieveData",
-            x => x.GetDataFromErp(), Cron.Hourly);
-    }
+    // private static void BackgroundJobConfigurator()
+    // {
+    //     RecurringJob.RemoveIfExists("ErpRetrieveData");
+    //     RecurringJob.AddOrUpdate<ErpRetrieveDataJob>("ErpRetrieveData",
+    //         x => x.ExecuteJobAsync(new ErpRetrieveDataJobArgs()), Cron.Hourly);
+    // }
 }

@@ -24,7 +24,6 @@ public class JobsController : ControllerBase
     public async Task<ActionResult> GetDataFromErp()
     {
         // await _jobService.GetDataFromErp();
-        
         // _recurringJobManager.AddOrUpdate<ErpStoreDatJobArgs>("Erp storing data",
         //     job => job.ExecuteAsync(new ErpStoreDatJobArgs()), Cron.Monthly(3), new RecurringJobOptions
         //     {

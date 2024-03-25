@@ -1,11 +1,12 @@
 using Hangfire;
-using Hangfire.SqlServer;
 using Microsoft.EntityFrameworkCore;
 using ScgcJob.Context;
 using ScgcJob.Extensions;
 using ScgcJob.Services;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddLogging(x => x.AddConsole().SetMinimumLevel(LogLevel.Information));
+
 builder.Services.AddControllers();
 
 builder.Services.AddScoped<IJobService, JobService>();
@@ -39,7 +40,6 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.UseHangfireDashboard("/dashboard");
-app.UseHangfireServer();
 
 app.MapControllers();
 

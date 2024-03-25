@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ScgcJob")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7be5b4252ada89e0794baa6b8367877a912a6284")]
 [assembly: System.Reflection.AssemblyProductAttribute("ScgcJob")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ScgcJob")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

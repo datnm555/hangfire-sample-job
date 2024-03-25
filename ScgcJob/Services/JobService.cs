@@ -1,5 +1,4 @@
 ﻿using System.Net;
-using Hangfire;
 using Hangfire.Server;
 using Polly;
 using Refit;
@@ -11,12 +10,10 @@ namespace ScgcJob.Services;
 public class JobService : IJobService
 {
     private readonly IErpApi _erpApi;
-    private readonly IRecurringJobManager _recurringJobManager;
 
-    public JobService(IErpApi erpApi, IRecurringJobManager recurringJobManager)
+    public JobService(IErpApi erpApi)
     {
         _erpApi = erpApi;
-        _recurringJobManager = recurringJobManager;
     }
 
     public async Task GetDataFromErp()
@@ -30,6 +27,7 @@ public class JobService : IJobService
         {
             throw new Exception();
         }
+
         Console.WriteLine($"Archiving file: test");
     }
 }

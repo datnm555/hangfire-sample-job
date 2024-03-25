@@ -318,3 +318,4 @@ C:\Users\mydat\OneDrive\Desktop\SMD\SCGC\sources-code\hangfire\ScgcJob\ScgcJob\o
 C:\Users\mydat\OneDrive\Desktop\SMD\SCGC\sources-code\hangfire\ScgcJob\ScgcJob\obj\Debug\net8.0\ScgcJob.pdb
 C:\Users\mydat\OneDrive\Desktop\SMD\SCGC\sources-code\hangfire\ScgcJob\ScgcJob\obj\Debug\net8.0\ScgcJob.genruntimeconfig.cache
 C:\Users\mydat\OneDrive\Desktop\SMD\SCGC\sources-code\hangfire\ScgcJob\ScgcJob\obj\Debug\net8.0\ref\ScgcJob.dll
+C:\Users\mydat\OneDrive\Desktop\SMD\SCGC\sources-code\hangfire\ScgcJob\ScgcJob\obj\Debug\net8.0\ScgcJob.sourcelink.json
