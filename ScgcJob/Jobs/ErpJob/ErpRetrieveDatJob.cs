@@ -1,22 +1,21 @@
 ﻿using System.Net;
-using Hangfire.Server;
 using Polly;
 using Refit;
 using ScgcJob.Models.Erp;
 using ScgcJob.Services.Integrations;
 
-namespace ScgcJob.Services;
+namespace ScgcJob.Jobs.ErpJob;
 
-public class JobService : IJobService
+public class ErpRetrieveDatJob
 {
     private readonly IErpApi _erpApi;
 
-    public JobService(IErpApi erpApi)
+    public ErpRetrieveDatJob(IErpApi erpApi)
     {
         _erpApi = erpApi;
     }
 
-    public async Task GetDataFromErp()
+    public async Task RetrieveDataFromErpAsync()
     {
         var response = await Policy<ApiResponse<IEnumerable<ErpResponse>>>
             .HandleResult(x => x.StatusCode == HttpStatusCode.InternalServerError)
@@ -28,6 +27,12 @@ public class JobService : IJobService
             throw new Exception();
         }
 
-        Console.WriteLine($"Archiving file: test");
+        Console.WriteLine($"Storing to FB");
+
+        foreach (var item in response.Content)
+        {
+            Console.WriteLine(
+                $"{item.Id} {item.Title} {item.Price} {item.Description} {item.Category} {item.Image}");
+        }
     }
 }

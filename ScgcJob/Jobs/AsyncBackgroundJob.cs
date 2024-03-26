@@ -1,15 +1,16 @@
 ﻿using Hangfire;
 using Hangfire.Server;
+using ScgcJob.Jobs.ErpJob;
 using ScgcJob.Services;
 
 namespace ScgcJob.Jobs;
 
-public abstract class AsyncBackgroundJob : BackgroundService
+public  class AsyncBackgroundJob : BackgroundService
 {
     private readonly IRecurringJobManager _recurringJobs;
     private readonly ILogger<RecurringJobScheduler> _logger;
 
-    protected AsyncBackgroundJob(IRecurringJobManager recurringJobs, ILogger<RecurringJobScheduler> logger)
+    public AsyncBackgroundJob(IRecurringJobManager recurringJobs, ILogger<RecurringJobScheduler> logger)
     {
         _recurringJobs = recurringJobs;
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
@@ -19,10 +20,10 @@ public abstract class AsyncBackgroundJob : BackgroundService
     {
         try
         {
-            _recurringJobs.AddOrUpdate<IJobService>("ErpRetrieveData",
-                x => x.GetDataFromErp(), Cron.Hourly, new RecurringJobOptions
+            _recurringJobs.AddOrUpdate<ErpRetrieveDatJob>("ErpRetrieveData",
+                x => x.RetrieveDataFromErpAsync(), Cron.Hourly, new RecurringJobOptions
                 {
-                    TimeZone = TimeZoneInfo.FindSystemTimeZoneById("Hawaiian Standard Time")
+                    TimeZone = TimeZoneInfo.FindSystemTimeZoneById("SE Asia Standard Time")
                 });
         }
         catch (Exception e)

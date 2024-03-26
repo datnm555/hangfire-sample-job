@@ -5,11 +5,10 @@ using ScgcJob.Extensions;
 using ScgcJob.Services;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddLogging(x => x.AddConsole().SetMinimumLevel(LogLevel.Information));
 
 builder.Services.AddControllers();
 
-builder.Services.AddScoped<IJobService, JobService>();
+// builder.Services.AddScoped<IJobService, JobService>();
 
 // Add services to the container.
 builder.Services.ConfigureErp(builder.Configuration);
